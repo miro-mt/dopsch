@@ -16,7 +16,6 @@ build:
     - script:
         name: copy binary
         code: cp app "$WERCKER_OUTPUT_DIR"
-
 deploy:
     box: google/golang
     steps:
