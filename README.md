@@ -4,9 +4,9 @@ DevOps example
 
 contains go code from https://github.com/golang/example/tree/master/outyet
 
-### [outyet](outyet/) ([godoc](//godoc.org/github.com/golang/example/outyet))
+### [dopsch](/) ([godoc](//godoc.org/github.com/miro-mt/dopsch))
 
-    go get github.com/golang/example/outyet
+    go get github.com/miro-mt/dopsch
 
 A web server that answers the question: "Is Go 1.x out yet?"
 
