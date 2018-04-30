@@ -16,6 +16,12 @@ build:
     - script:
         name: copy binary
         code: cp app "$WERCKER_OUTPUT_DIR"
+    # Copy cert
+    - script:
+        name: copy cert
+        code: |
+          mkdir -p "$WERCKER_OUTPUT_DIR/etc/ssl/certs/"
+          cp /etc/ssl/certs/ca-certificates.crt  "$WERCKER_OUTPUT_DIR/etc/ssl/certs/"
 deploy:
     box: google/golang
     steps:
