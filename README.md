@@ -2,7 +2,7 @@
 
 DevOps example
 
-contains go code from https://github.com/golang/example/tree/master/outyet
+Contains go code from https://github.com/golang/example/tree/master/outyet
 
 ### [dopsch](/) ([godoc](//godoc.org/github.com/miro-mt/dopsch))
 
