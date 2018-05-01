@@ -2,6 +2,20 @@
 
 DevOps example
 
+The goal of this example is to automate CICD process and Kubernetes cluster creation/deletion.
+
+To do this I assume you have:
+
+- gcloud command line
+- google cloud account with a project/default zone created
+- Google Cloud DNS API enabled
+- kubectl, helm command line
+- a domain name (you can use freenom.com to get a free one) and you have pointed it to google name servers
+- wercker CICD account to build images from github and push them to quay.io repository
+
+I've chosen nginx ingress for portability. Also, kube-lego instead of cert manager since at the moment
+cert manager says it's not production ready even though it says it has more features.
+
 Contains go code from https://github.com/golang/example/tree/master/outyet
 
 ### [dopsch](/) ([godoc](//godoc.org/github.com/miro-mt/dopsch))
