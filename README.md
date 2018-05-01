@@ -13,6 +13,8 @@ To do this I assume you have:
 - a domain name (you can use freenom.com to get a free one) and you have pointed it to google name servers
 - wercker CICD account to build images from github and push them to quay.io repository
 
+Please edit common.sh to your setup.
+
 I've chosen nginx ingress for portability. Also, kube-lego instead of cert manager since at the moment
 cert manager says it's not production ready even though it says it has more features.
 

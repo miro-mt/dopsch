@@ -2,6 +2,7 @@
 
 CLUSTER_NAME=dopsch
 CLUSTER_ZONE=europe-west1-b
+# gigabytes
 DISK_SIZE=20
 MACHINE_TYPE=n1-standard-1
 NUM_NODES=1
@@ -10,5 +11,6 @@ HELM_INGRESS_NAME=entrance
 LEGO_EMAIL=abcd@osadmin.com
 LEGO_URL=https://acme-v01.api.letsencrypt.org/directory
 DNS_ZONE_NAME=dopsch
+# your top dns domain
 DNS_TOP_DOMAIN=dopsch.ga
 
