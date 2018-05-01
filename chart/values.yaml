@@ -1,0 +1,44 @@
+# Default values for dopsch.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: quay.io/miro_mt/dopsch
+  tag: 3faad0a1c8582f07489a068137c1f5a45bca34b7
+  pullPolicy: IfNotPresent
+  containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - www.dopsch.ga
+    - dopsch.ga
+  tls:
+    - secretName: dopsch-tls
+      hosts:
+        - www.dopsch.ga
+        - dopsch.ga
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 50Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
