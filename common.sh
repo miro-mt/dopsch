@@ -10,7 +10,8 @@ NAMESPACE=dopsch
 HELM_INGRESS_NAME=entrance
 LEGO_EMAIL=abcd@osadmin.com
 LEGO_URL=https://acme-v01.api.letsencrypt.org/directory
-DNS_ZONE_NAME=dopsch
-# your top dns domain
-DNS_TOP_DOMAIN=dopsch.ga
+DNS_RECORD_NAME=dopsch
+DNS_TOP_DOMAIN=trguj.com
+# API Token to access DigitalOcean API to set up dns
+#	if empty we just skip creating A record for the application
 

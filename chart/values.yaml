@@ -21,13 +21,11 @@ ingress:
     kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - www.dopsch.ga
-    - dopsch.ga
+    - dopsch.trguj.com
   tls:
     - secretName: dopsch-tls
       hosts:
-        - www.dopsch.ga
-        - dopsch.ga
+        - dopsch.trguj.com
 
 resources:
   limits:

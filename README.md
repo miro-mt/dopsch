@@ -6,14 +6,17 @@ The goal of this example is to automate CICD process and Kubernetes cluster crea
 
 To do this I assume you have:
 
+- wercker CICD account to build images from github and push them to quay.io repository
 - gcloud command line
 - google cloud account with a project/default zone created
-- Google Cloud DNS API enabled
-- kubectl, helm command line
-- a domain name (you can use freenom.com to get a free one) and you have pointed it to google name servers
-- wercker CICD account to build images from github and push them to quay.io repository
+- kubectl, helm command line (latest versions, helm had a bug with tiller init and --wait)
+- curl
+- a domain name, this example uses DigitalOcean since freenom.com had API issues
+	please specify DIGITAL_OCEAN_API_TOKEN environment variable or update DNS manually
+	domain name should already have an A record for your subdomain
+- jq command line for handling json input from DigitalOcean
 
-Please edit common.sh to your setup.
+Please edit common.sh and chart/values.yaml to your setup.
 
 I've chosen nginx ingress for portability. Also, kube-lego instead of cert manager since at the moment
 cert manager says it's not production ready even though it says it has more features.

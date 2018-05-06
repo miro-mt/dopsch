@@ -1,6 +1,23 @@
 #!/bin/bash
 set -e
 
+if [ -z $DIGITAL_OCEAN_API_TOKEN ]; then
+cat << EOD
+To automatically update DNS at DigitalOcean this script requires DIGITAL_OCEAN_API_TOKEN environment variable.
+Since you didn't specify it, you will need to manually update your DNS later.
+
+EOD
+        while true; do
+            read -p "Do you wish to continue? " yn
+            case $yn in
+                [Yy]* ) echo "Going on"; break;;
+                [Nn]* ) exit;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+
+fi
+
 . ./common.sh
 
 gcloud container clusters create $CLUSTER_NAME \
@@ -50,29 +67,17 @@ echo "got $external_ip"
 echo "installing Let's Encrypt via helm"
 helm upgrade --install --wait --timeout 420 --namespace kube-system --set "config.LEGO_EMAIL=$LEGO_EMAIL,config.LEGO_URL=$LEGO_URL,rbac.create=true" toy stable/kube-lego
 
-echo "make sure you have Google Cloud DNS API enabled: https://cloud.google.com/dns/zones/"
+if [ ! -z $DIGITAL_OCEAN_API_TOKEN ]; then
 
-echo "creating zone $DNS_ZONE_NAME"
-gcloud dns managed-zones create \
-        --dns-name="$DNS_TOP_DOMAIN." \
-        --description="DevOps Challenge" "$DNS_ZONE_NAME"
+        # first get ID of our subdomain
+        SUBDOMAIN_ID=$(curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $DIGITAL_OCEAN_API_TOKEN" "https://api.digitalocean.com/v2/domains/$DNS_TOP_DOMAIN/records"|jq ".domain_records |.[]|select(.name==\"$DNS_RECORD_NAME\").id")
 
-echo "creating records"
+        curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer $DIGITAL_OCEAN_API_TOKEN" -d "{\"data\":\"$external_ip\"}" "https://api.digitalocean.com/v2/domains/$DNS_TOP_DOMAIN/records/$SUBDOMAIN_ID"
+	echo
 
-gcloud dns record-sets transaction start -z=$DNS_ZONE_NAME
-
-gcloud dns record-sets transaction add -z=$DNS_ZONE_NAME \
-    --name="$DNS_TOP_DOMAIN." \
-   --type=A \
-   --ttl=60 "$external_ip"
-
-gcloud dns record-sets transaction add -z=$DNS_ZONE_NAME \
-    --name="www.$DNS_TOP_DOMAIN." \
-   --type=A \
-   --ttl=60 "$external_ip"
-
-gcloud dns record-sets transaction execute -z=$DNS_ZONE_NAME
-
+else
+        echo "Skipping A record creation for DNS"
+fi
 
 # install dopsch helm chart
 
