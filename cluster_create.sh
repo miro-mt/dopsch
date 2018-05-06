@@ -39,10 +39,13 @@ kubectl config set-context $(kubectl config current-context) --namespace=$NAMESP
 echo "installing helm"
 kubectl create serviceaccount -n kube-system tiller
 kubectl create clusterrolebinding tiller-binding --clusterrole=cluster-admin --serviceaccount kube-system:tiller
-# --wait, block untill tiller is ready to service requests
+# --wait, block until tiller is ready to service requests
 helm init --service-account tiller --wait
 
 helm repo update
+
+# give some time to tiller
+sleep 15
 
 # install nginx ingress
 

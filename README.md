@@ -12,22 +12,23 @@ CICD Process goes like this:
 - Developer pushes code to Github
 - Wercker CICD builds and deploys image to Quay.io
 
-Kubernetes cluster is created with ./cluster_create.sh and the sample helm chart is deployed to install the image.
-To delete the whole Kubernetes cluster run ./cluster_delete.sh
+Please edit common.sh and chart/values.yaml to your setup.
+
+Kubernetes cluster is created with cluster_create.sh. This also deploys helm chart for the image.
+If you want to autoupdate your subdomain DNS at DigitalOcean please specify DIGITAL_OCEAN_API_TOKEN environment variable before calling cluster_create.sh.
+DigitalOcean domain name should already have an A record for your subdomain.
+
+To delete the whole Kubernetes cluster run cluster_delete.sh
 
 To do this I assume you have:
 
-- wercker CICD account to build images from github and push them to quay.io repository set up
+- Wercker CICD account to build images from github and push them to quay.io repository set up
 - gcloud command line
 - google cloud account with a project/default zone created
 - kubectl, helm command line (latest versions, helm had a bug with tiller init and --wait)
 - curl
-- a domain name, this example uses DigitalOcean since freenom.com had API issues
-	please specify DIGITAL_OCEAN_API_TOKEN environment variable or update DNS manually
-	domain name should already have an A record for your subdomain
+- a domain name, this example uses DigitalOcean since freenom.com had API issues.
 - jq command line for handling json input from DigitalOcean
-
-Please edit common.sh and chart/values.yaml to your setup.
 
 I've chosen nginx ingress for portability. Also, kube-lego instead of cert manager since at the moment
 cert manager says it's not production ready even though it says it has more features.
