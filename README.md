@@ -13,6 +13,7 @@ CICD Process goes like this:
 - Wercker CICD builds and deploys image to Quay.io
 
 Kubernetes cluster is created with ./cluster_create.sh and the sample helm chart is deployed to install the image
+To delete the whole Kubernetes cluster run ./cluster_delete.sh
 
 To do this I assume you have:
 
