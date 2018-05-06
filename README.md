@@ -2,9 +2,17 @@
 
 DevOps example
 
-The goal of this example is to automate CICD process and Kubernetes cluster creation/deletion.
-
 ![dopsch diagram](dopsch.jpg?raw=true "diagram")
+
+This example:
+- automates CICD process to build and deploy application image 
+- has scripts to create Kubernetes cluster in Google cloud, all necessary tools and deploy image
+
+CICD Process goes like this:
+- Developer pushes code to Github
+- Wercker CICD builds and deploys image to Quay.io
+
+Kubernetes cluster is created with ./cluster_create.sh and the sample helm chart is deployed to install the image
 
 To do this I assume you have:
 
