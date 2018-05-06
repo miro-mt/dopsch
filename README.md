@@ -2,7 +2,7 @@
 
 DevOps example
 
-![dopsch diagram](dopsch.jpg?raw=true "diagram")
+![dopsch diagram](diagram.jpg?raw=true "diagram")
 
 This example:
 - automates CICD process to build and deploy application image 
