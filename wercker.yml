@@ -30,7 +30,7 @@ deploy:
         username: $QUAY_USERNAME
         password: $QUAY_PASSWORD
         cmd: ./app
-        tag: $WERCKER_GIT_COMMIT
+        tag: latest
         ports: "8080"
         repository: quay.io/miro_mt/dopsch
         registry: https://quay.io

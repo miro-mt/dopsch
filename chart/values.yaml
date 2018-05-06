@@ -6,8 +6,8 @@ replicaCount: 1
 
 image:
   repository: quay.io/miro_mt/dopsch
-  tag: 3faad0a1c8582f07489a068137c1f5a45bca34b7
-  pullPolicy: IfNotPresent
+  tag: latest
+  pullPolicy: Always
   containerPort: 8080
 
 service:
