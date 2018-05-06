@@ -4,9 +4,11 @@ DevOps example
 
 The goal of this example is to automate CICD process and Kubernetes cluster creation/deletion.
 
+![dopsch diagram](dopsch.svg?raw=true "diagram")
+
 To do this I assume you have:
 
-- wercker CICD account to build images from github and push them to quay.io repository
+- wercker CICD account to build images from github and push them to quay.io repository set up
 - gcloud command line
 - google cloud account with a project/default zone created
 - kubectl, helm command line (latest versions, helm had a bug with tiller init and --wait)

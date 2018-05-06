@@ -47,7 +47,7 @@ helm repo update
 # install nginx ingress
 
 echo "installing nginx ingress via helm"
-helm upgrade --install --wait --timeout 120 --namespace kube-system --set "rbac.create=true" $HELM_INGRESS_NAME stable/nginx-ingress
+helm upgrade --install --wait --timeout 120 --namespace kube-system --set "rbac.create=true" $NGINX_HELM_INGRESS_NAME stable/nginx-ingress
 
 # wait for load balancer to get external IP
 
@@ -55,7 +55,7 @@ echo "waiting to get load balancer external ip"
 external_ip=""
 while [ -z $external_ip ]; do
     sleep 10
-    external_ip=$(kubectl -n kube-system get svc $HELM_INGRESS_NAME-nginx-ingress-controller --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
+    external_ip=$(kubectl -n kube-system get svc $NGINX_HELM_INGRESS_NAME-nginx-ingress-controller --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
     echo -n "."
 done
 
@@ -65,7 +65,7 @@ echo "got $external_ip"
 # install Let's Encrypt
 
 echo "installing Let's Encrypt via helm"
-helm upgrade --install --wait --timeout 420 --namespace kube-system --set "config.LEGO_EMAIL=$LEGO_EMAIL,config.LEGO_URL=$LEGO_URL,rbac.create=true" toy stable/kube-lego
+helm upgrade --install --wait --timeout 420 --namespace kube-system --set "config.LEGO_EMAIL=$LEGO_EMAIL,config.LEGO_URL=$LEGO_URL,rbac.create=true" $LEGO_HELM_RELEASE_NAME stable/kube-lego
 
 if [ ! -z $DIGITAL_OCEAN_API_TOKEN ]; then
 
@@ -82,5 +82,5 @@ fi
 # install dopsch helm chart
 
 echo "installing dopsch helm chart"
-helm upgrade --install --namespace $NAMESPACE --wait --timeout 120  dopsch ./chart
+helm upgrade --install --namespace $NAMESPACE --wait --timeout 120  $DOPSCH_HELM_RELEASE_NAME ./chart
 
