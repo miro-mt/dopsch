@@ -33,6 +33,8 @@ To do this I assume you have:
 I've chosen nginx ingress for portability. Also, kube-lego instead of cert manager since at the moment
 cert manager says it's not production ready even though it says it has more features.
 
+Also, something like Terraform should probably be better for cluster create/drop since it is idempotent.
+
 Contains go code from https://github.com/golang/example/tree/master/outyet
 
 ### [dopsch](/) ([godoc](//godoc.org/github.com/miro-mt/dopsch))
