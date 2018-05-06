@@ -4,7 +4,7 @@ DevOps example
 
 The goal of this example is to automate CICD process and Kubernetes cluster creation/deletion.
 
-![dopsch diagram](dopsch.svg?raw=true "diagram")
+![dopsch diagram](dopsch.jpg?raw=true "diagram")
 
 To do this I assume you have:
 
